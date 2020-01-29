@@ -33,6 +33,15 @@ function cleanPID(pid) {
 	}
 }
 
+function randomBetween(min, max) {
+	var min = min || false;
+	var max = max | false;
+
+	var r = Math.floor( Math.random() * ( max+1 - min ) ) + min
+	return r;
+
+}
+
 function mpv_effect(index) {
 
 	var index = index || false
@@ -43,7 +52,7 @@ function mpv_effect(index) {
 
 	var effectTimeout = setTimeout(function(){
 		effect.kill();
-	},10000);
+	},randomBetween(20000, 60000));
 
 
 	console.log(index + ": " + effect["pid"])
