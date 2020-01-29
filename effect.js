@@ -114,7 +114,7 @@ function mpv_speed_effect ( input ) {
 		// send_mpv_speed_effect(String(randomBetween(0,9)), String(randomBetween(89,99)), input)
 		queue.push({
 			"function":send_mpv_speed_effect,
-			"args":[String(randomBetween(79,99)), start - i,  input]
+			"args":[String(randomBetween(100,2099)/1000), start - i,  input]
 		});
 
 	}

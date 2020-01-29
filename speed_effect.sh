@@ -30,7 +30,7 @@ if [[ ! -p "./mpv_fifo/input"$INPUT ]]; then
 	exit 1;
 fi
 
-sleep 0.2$SLEEP;
+sleep $SLEEP;
 echo "bang"
 echo '{ "command" : [ "set_property", "speed", 0.'$SPEED'] }' > ./mpv_fifo/input$INPUT;
 echo "done";
