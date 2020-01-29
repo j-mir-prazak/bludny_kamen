@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd /home/pi/bludny_kamen/
 Process="node"
 counter=0
 
