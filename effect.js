@@ -108,13 +108,13 @@ function randomBetween(min, max) {
 
 function mpv_speed_effect ( input ) {
 	var input = input || false;
-	var start = String(randomBetween(910,999));
+	var start = String(randomBetween(930,999));
 	for (var i = 0; i < randomBetween(69,92); i++) {
 
 		// send_mpv_speed_effect(String(randomBetween(0,9)), String(randomBetween(89,99)), input)
 		queue.push({
 			"function":send_mpv_speed_effect,
-			"args":[String(randomBetween(5,9)), start - i,  input]
+			"args":[String(randomBetween(79,99)), start - i,  input]
 		});
 
 	}
