@@ -33,12 +33,18 @@ function cleanPID(pid) {
 	}
 }
 
-function mpv_effect( ) {
+function mpv_effect(index) {
 
-	var effect = spawner.spawn("bash", new Array("-c", "node effect.js" + index + " " + file), {detached: false})
+	var index = index || false
+	var effect = spawner.spawn("bash", new Array("-c", "node effect.js " + index), {detached: false})
 	var decoder = new StringDecoder('utf-8')
 
 	pids.push(effect["pid"])
+
+	var effectTimeout = setTimeout(function(){
+		effect.kill();
+	},10000);
+
 
 	console.log(index + ": " + effect["pid"])
 
@@ -46,7 +52,9 @@ function mpv_effect( ) {
 	  var string = decoder.write(data)
 		string=string.split(/\r?\n/)
 		for( var i = 0; i < string.length; i++) {
-			if ( string[i] != "" ) console.log(index + " : " + string[i])
+			if ( string[i] != "" ) {
+				console.log("effect " + index + " : " + string[i])
+				}
 
 			}
 	});
@@ -56,11 +64,13 @@ function mpv_effect( ) {
 
 	});
 
-	effect.on('close', function (pid, code) {
+	effect.on('close', function (pid, effectTimeout, index, code) {
 		console.log(pid + " effect done. code " + code +".")
 		cleanPID(pid)
+		clearTimeout(effectTimeout)
+		if ( players[index].started=true ) mpv_effect(index)
 
-	}.bind(null, effect["pid"]));
+	}.bind(null, effect["pid"], effectTimeout, index));
 	return effect;
 }
 
@@ -83,6 +93,9 @@ function mpv_player(index, file) {
 			if ( string[i] != "" ) console.log(index + " : " + string[i])
 			if ( string[i].match(/AO:/) ) {
 				players[index].started = true
+				if (index == 1) {
+					mpv_effect(index)
+				}
 				check_ready_players()
 				}
 			}

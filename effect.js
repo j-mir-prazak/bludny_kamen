@@ -35,9 +35,6 @@ function cleanPID(pid) {
 }
 
 
-// var options = process.argv[3];
-// console.log( JSON.parse( options ) );
-
 function send_mpv_speed_effect( args ) {
 
 	var sleep = args[0] || false;
@@ -64,6 +61,7 @@ function send_mpv_speed_effect( args ) {
 		for( var i = 0; i < string.length; i++) {
 			if ( string[i] != "" ) console.log(string[i])
 			if ( string[i] != "bang" ) {
+				console.log(sleep + " " + speed)
 				clearTimeout(killerInstinct)
 				killerInstinct = setTimeout(function(){
 					console.log("kill")
@@ -82,7 +80,7 @@ function send_mpv_speed_effect( args ) {
 
 	});
 
-	effect.on('close', function (pid, code) {
+	effect.on('close', function (pid,code) {
 		clearTimeout(killerInstinct)
 		console.log(pid + " effect done. code " + code +".")
 		cleanPID(pid)
@@ -110,12 +108,13 @@ function randomBetween(min, max) {
 
 function mpv_speed_effect ( input ) {
 	var input = input || false;
-	for (var i = 0; i < 10000; i++) {
+	var start = String(randomBetween(910,999));
+	for (var i = 0; i < randomBetween(69,92); i++) {
 
 		// send_mpv_speed_effect(String(randomBetween(0,9)), String(randomBetween(89,99)), input)
 		queue.push({
 			"function":send_mpv_speed_effect,
-			"args":[String(randomBetween(0,9)), String(randomBetween(89,99)), input]
+			"args":[String(randomBetween(5,9)), start - i,  input]
 		});
 
 	}
@@ -135,13 +134,15 @@ function queue_handler() {
 
 	if ( handling_queue == false && queue.length > 0 ) {
 		handling_queue = true;
-		var first = queue.pop();
+		var first = queue.shift();
 		first["function"](first["args"])
 	}
 
 }
 
 
-mpv_speed_effect("1");
+var index = process.argv[2];
+
+mpv_speed_effect(index);
 
 // mpv_effect()
