@@ -97,7 +97,6 @@ trap terminate SIGTERM
 
 
 echo -e "CHECKING FOR FILES TO UPDATE."
-sleep 10
 
 for i in /media/* ; do
 
@@ -129,13 +128,7 @@ done
 
 chmod 0777 -R ./*
 
-echo -e "PAUSING."
-echo -e "10"
-sleep 5
-echo -e "5"
-sleep 1
-echo -e "4"
-sleep 1
+
 echo -e "3"
 sleep 1
 echo -e "2"
