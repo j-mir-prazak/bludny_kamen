@@ -92,7 +92,7 @@ ad="--audio-device=alsa"
 #sleep by index
 # sleep $(($1))
 
-mpv $pause --alsa-ignore-chmap --alsa-non-interleaved --cache-secs=5 --demuxer-readahead-secs=5 --audio-buffer=0.5 --input-file=./mpv_fifo/input$index --audio-device="alsa/plughw:CARD=Device,DEV=0" $af -msg-level=ao/alsa=debug "$file" --no-video --no-audio-display --audio-pitch-correction=no &
+mpv $pause --alsa-ignore-chmap --alsa-non-interleaved --cache-secs=5 --demuxer-readahead-secs=5 --audio-buffer=0.5 --input-file=./mpv_fifo/input$index --audio-device="alsa/dmix:CARD=Device,DEV=0" $af -msg-level=ao/alsa=debug "$file" --no-video --no-audio-display --audio-pitch-correction=no &
 
 PROC1=$!
 
