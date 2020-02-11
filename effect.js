@@ -167,7 +167,9 @@ function randomBetween(min, max) {
 }
 
 
-function mpv_speed_effect ( input ) {
+
+
+function mpv_volume_effect ( input ) {
 	var input = input || false;
 	var start = String(randomBetween(930,999));
 	var end = randomBetween(300,700);
@@ -190,7 +192,7 @@ function mpv_speed_effect ( input ) {
 }
 
 
-function mpv_volume_effect ( input ) {
+function mpv_speed_effect ( input ) {
 	var input = input || false;
 	var start = String(randomBetween(1,9999));
 	if (start > 500 && start < 504 ) {
