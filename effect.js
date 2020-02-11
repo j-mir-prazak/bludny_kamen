@@ -225,6 +225,7 @@ function queue_handler() {
 	if ( handling_queue == false && queue.length > 0 ) {
 		handling_queue = true;
 		var first = queue.shift();
+		console.log(first)
 		first["function"](first["args"])
 	}
 
