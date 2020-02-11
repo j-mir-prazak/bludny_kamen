@@ -187,7 +187,7 @@ function mpv_volume_effect ( input ) {
 
 		}
 	}
-	// console.log(queue)
+	console.log(queue)
 	queue_handler()
 
 
