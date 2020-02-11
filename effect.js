@@ -172,8 +172,8 @@ function mpv_volume_effect ( input ) {
 	var start = randomBetween(500,505);
 	console.log("start "+start)
 	if (start > 500 && start < 505 ) {
-		var end = randomBetween(300,700);
-		var step = 999 / end;
+		var end = randomBetween(20,45);
+		var step = 99 / end;
 		console.log("step " + step)
 		var vol = 0;
 		for ( var i = 0; i < end; i++ ) {
