@@ -119,14 +119,14 @@ function send_mpv_volume_effect( args ) {
 		for( var i = 0; i < string.length; i++) {
 			if ( string[i] != "" ) console.log(string[i])
 			if ( string[i] != "bang" ) {
-				console.log(sleep + " " + speed)
+				console.log(volume + " " + speed)
 				clearTimeout(killerInstinct)
 				killerInstinct = setTimeout(function(){
 					console.log("kill")
 					console.log(effect.pid)
 					// process.kill(effect.pid);
 					if ( process.kill( effect.pid, 0 ) ) process.kill( effect.pid )
-				},(sleep*10)+10)
+				},20)
 
 			}
 
