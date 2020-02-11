@@ -51,9 +51,16 @@ function mpv_effect(index, type) {
 
 	pids.push(effect["pid"])
 
+	var wait = 0;
+	if ( index == 1 ) {
+		wait = randomBetween(20000, 60000);
+		}
+	else if ( index == 2 ) {
+		wait = randomBetween(60000, 90000);
+		}
 	var effectTimeout = setTimeout(function(){
 		effect.kill();
-	},randomBetween(20000, 60000));
+	},wait);
 	console.log("effect 2 test" + index)
 
 	console.log(index + ": " + effect["pid"])

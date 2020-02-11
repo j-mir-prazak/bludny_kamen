@@ -193,7 +193,7 @@ function mpv_volume_effect ( input ) {
 			});
 
 		queue_handler()
-		},randomBetween(6000,20000))
+		},randomBetween(6000,30000))
 	}
 	// console.log(queue)
 	queue_handler()
