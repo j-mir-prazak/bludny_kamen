@@ -190,6 +190,8 @@ function mpv_volume_effect ( input ) {
 					"function":send_mpv_volume_effect,
 					"args":[0,  input]
 				});
+
+			queue_handler()
 			},randomBetween(6000,20000))
 
 		}
