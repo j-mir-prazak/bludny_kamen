@@ -61,7 +61,6 @@ function mpv_effect(index, type) {
 	var effectTimeout = setTimeout(function(){
 		effect.kill();
 	},wait);
-	console.log("effect 2 test" + index)
 
 	console.log(index + ": " + effect["pid"])
 
