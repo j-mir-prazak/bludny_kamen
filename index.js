@@ -42,10 +42,11 @@ function randomBetween(min, max) {
 
 }
 
-function mpv_effect(index) {
+function mpv_effect(index, type) {
 
 	var index = index || false
-	var effect = spawner.spawn("bash", new Array("-c", "node effect.js " + index), {detached: false})
+	var type = type || false
+	var effect = spawner.spawn("bash", new Array("-c", "node effect.js " + index + " " + type), {detached: false})
 	var decoder = new StringDecoder('utf-8')
 
 	pids.push(effect["pid"])
@@ -73,13 +74,13 @@ function mpv_effect(index) {
 
 	});
 
-	effect.on('close', function (pid, effectTimeout, index, code) {
+	effect.on('close', function (pid, effectTimeout, index, type, code) {
 		console.log(pid + " effect done. code " + code +".")
 		cleanPID(pid)
 		clearTimeout(effectTimeout)
-		if ( players[index].started=true ) mpv_effect(index)
+		if ( players[index].started=true ) mpv_effect(index, type)
 
-	}.bind(null, effect["pid"], effectTimeout, index));
+	}.bind(null, effect["pid"], effectTimeout, index, type));
 	return effect;
 }
 
@@ -103,7 +104,7 @@ function mpv_player(index, file) {
 			if ( string[i].match(/AO:/) ) {
 				players[index].started = true
 				if (index == 1) {
-					mpv_effect(index)
+					mpv_effect(index, "speed")
 				}
 				check_ready_players()
 				}

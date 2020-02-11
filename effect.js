@@ -95,6 +95,66 @@ function send_mpv_speed_effect( args ) {
 
 
 }
+function send_mpv_volume_effect( args ) {
+
+	var sleep = args[0] || false;
+	var speed = args[1] || false;
+	var input = args[2] || false;
+
+	console.log("sleep "+sleep)
+	console.log("speed "+speed)
+
+	var effect = spawner.spawn( './volume_effect.sh', new Array(sleep,speed,input), {detached:true, shell:'/bin/bash'} )
+	var killerInstinct = setTimeout(function(){
+		console.log("kill")
+		console.log(effect.pid)
+		// process.kill(effect.pid);
+		if ( process.kill( effect.pid, 0 ) ) process.kill( effect.pid )
+	},500)
+	var decoder = new StringDecoder('utf-8')
+
+	pids.push(effect["pid"])
+
+	effect.stdout.on('data', (data) => {
+	  var string = decoder.write(data)
+		string=string.split(/\r?\n/)
+		for( var i = 0; i < string.length; i++) {
+			if ( string[i] != "" ) console.log(string[i])
+			if ( string[i] != "bang" ) {
+				console.log(sleep + " " + speed)
+				clearTimeout(killerInstinct)
+				killerInstinct = setTimeout(function(){
+					console.log("kill")
+					console.log(effect.pid)
+					// process.kill(effect.pid);
+					if ( process.kill( effect.pid, 0 ) ) process.kill( effect.pid )
+				},(sleep*10)+10)
+
+			}
+
+			}
+	});
+	//not final state!
+	effect.stderr.on('data', (data) => {
+
+
+	});
+
+	effect.on('close', function (pid,code) {
+		clearTimeout(killerInstinct)
+		console.log(pid + " effect done. code " + code +".")
+		cleanPID(pid)
+		handling_queue = false;
+		queue_handler();
+
+
+	}.bind(null, effect["pid"]));
+	return effect;
+
+
+
+
+}
 
 //random between including
 function randomBetween(min, max) {
@@ -106,18 +166,46 @@ function randomBetween(min, max) {
 
 }
 
+
 function mpv_speed_effect ( input ) {
 	var input = input || false;
 	var start = String(randomBetween(930,999));
-	for (var i = 0; i < randomBetween(69,92); i++) {
-
+	var end = randomBetween(300,700);
+	var step = end / 999;
+	var vol = 0;
+	for (var i = 0; i < end; i++) {
+		vol = vol + step
 		// send_mpv_speed_effect(String(randomBetween(0,9)), String(randomBetween(89,99)), input)
 		queue.push({
-			"function":send_mpv_speed_effect,
-			"args":[String(randomBetween(100,2099)/1000), start - i,  input]
+			"function":send_mpv_volume_effect,
+			"args":[vol,  input]
 		});
 
 	}
+	// console.log(queue)
+	queue_handler()
+
+
+
+}
+
+
+function mpv_volume_effect ( input ) {
+	var input = input || false;
+	var start = String(randomBetween(1,9999));
+	if (start > 500 && start < 504 ) {
+		for (var i = 0; i < randomBetween(69,92); i++) {
+
+			// send_mpv_speed_effect(String(randomBetween(0,9)), String(randomBetween(89,99)), input)
+			queue.push({
+				"function":send_mpv_volume_effect,
+				"args":[String(randomBetween(100,2099)/1000), start - i,  input]
+			});
+
+		}
+
+	}
+
 	// console.log(queue)
 	queue_handler()
 
@@ -142,7 +230,8 @@ function queue_handler() {
 
 
 var index = process.argv[2];
-
-mpv_speed_effect(index);
+var type = process.argv[3];
+if (type == "speed") mpv_speed_effect(index);
+if (type == "volume") mpv_volume_effect(index);
 
 // mpv_effect()
