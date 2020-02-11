@@ -171,18 +171,20 @@ function randomBetween(min, max) {
 
 function mpv_volume_effect ( input ) {
 	var input = input || false;
-	var start = String(randomBetween(930,999));
-	var end = randomBetween(300,700);
-	var step = end / 999;
-	var vol = 0;
-	for (var i = 0; i < end; i++) {
-		vol = vol + step
-		// send_mpv_speed_effect(String(randomBetween(0,9)), String(randomBetween(89,99)), input)
-		queue.push({
-			"function":send_mpv_volume_effect,
-			"args":[vol,  input]
-		});
+	var start = randomBetween(930,999);
+	if (start > 500 && start < 504 ) {
+		var end = randomBetween(300,700);
+		var step = end / 999;
+		var vol = 0;
+		for (var i = 0; i < end; i++) {
+			vol = vol + step
+			// send_mpv_speed_effect(String(randomBetween(0,9)), String(randomBetween(89,99)), input)
+			queue.push({
+				"function":send_mpv_volume_effect,
+				"args":[String(vol),  input]
+			});
 
+		}
 	}
 	// console.log(queue)
 	queue_handler()
@@ -194,9 +196,8 @@ function mpv_volume_effect ( input ) {
 
 function mpv_speed_effect ( input ) {
 	var input = input || false;
-	var start = String(randomBetween(1,9999));
-	if (start > 500 && start < 504 ) {
-		for (var i = 0; i < randomBetween(69,92); i++) {
+	var start = String(randomBetween(930,999));
+	for (var i = 0; i < randomBetween(69,92); i++) {
 
 			// send_mpv_speed_effect(String(randomBetween(0,9)), String(randomBetween(89,99)), input)
 			queue.push({
@@ -205,7 +206,6 @@ function mpv_speed_effect ( input ) {
 			});
 
 		}
-
 	}
 
 	// console.log(queue)
