@@ -187,7 +187,7 @@ function mpv_volume_effect ( input ) {
 
 		}
 	}
-	console.log(queue)
+	// console.log(queue)
 	queue_handler()
 
 
@@ -225,7 +225,7 @@ function queue_handler() {
 	if ( handling_queue == false && queue.length > 0 ) {
 		handling_queue = true;
 		var first = queue.shift();
-		// console.log(first)
+		console.log(first)
 		first["function"](first["args"])
 	}
 
