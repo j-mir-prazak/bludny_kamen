@@ -54,7 +54,7 @@ function mpv_effect(index, type) {
 	var effectTimeout = setTimeout(function(){
 		effect.kill();
 	},randomBetween(20000, 60000));
-
+	console.log("effect 2 test" + index)
 
 	console.log(index + ": " + effect["pid"])
 
@@ -78,7 +78,9 @@ function mpv_effect(index, type) {
 		console.log(pid + " effect done. code " + code +".")
 		cleanPID(pid)
 		clearTimeout(effectTimeout)
-		if ( players[index].started=true ) mpv_effect(index, type)
+		if ( players[index].started=true ) {
+			return mpv_effect(index, type)
+		}
 
 	}.bind(null, effect["pid"], effectTimeout, index, type));
 	return effect;
