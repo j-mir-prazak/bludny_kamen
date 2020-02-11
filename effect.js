@@ -185,16 +185,15 @@ function mpv_volume_effect ( input ) {
 				"args":[String(Math.floor(vol)),  input]
 			});
 
-			setTimeout(function(){
-				queue.push({
-					"function":send_mpv_volume_effect,
-					"args":[0,  input]
-				});
-
-			queue_handler()
-			},randomBetween(6000,20000))
-
 		}
+		setTimeout(function(){
+			queue.push({
+				"function":send_mpv_volume_effect,
+				"args":[0,  input]
+			});
+
+		queue_handler()
+		},randomBetween(6000,20000))
 	}
 	// console.log(queue)
 	queue_handler()
