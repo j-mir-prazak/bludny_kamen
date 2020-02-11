@@ -1,13 +1,10 @@
 !/bin/bash
 
-SLEEP=0;
+VOLUME=0;
 INPUT=0;
 
 if [[ ! -z $1 ]]; then
-	SLEEP=$1;
-else
-	echo "no sleep time set"
-	exit 1;
+	VOLUME=$1;
 fi
 
 if [[ ! -z $2 ]]; then
@@ -24,6 +21,6 @@ fi
 
 sleep 0.3;
 echo "bang"
-echo '{ "command" : [ "set_property", "volume", 0.'$SPEED'] }' > ./mpv_fifo/input$INPUT;
+echo '{ "command" : [ "set_property", "volume", 0.'$VOLUME'] }' > ./mpv_fifo/input$INPUT;
 echo "done";
 exit 0;
