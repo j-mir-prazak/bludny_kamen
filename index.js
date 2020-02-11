@@ -104,10 +104,10 @@ function mpv_player(index, file) {
 			if ( string[i].match(/AO:/) ) {
 				players[index].started = true
 				if (index == 1) {
-					mpv_effect(index, "speed")
+					players[index].effect = mpv_effect(index, "speed")
 				}
 				if (index == 2) {
-					mpv_effect(index, "volume")
+					players[index].effect = mpv_effect(index, "volume")
 				}
 				check_ready_players()
 				}
@@ -154,7 +154,8 @@ function setup_player(index,file) {
 	players[index] = 	{
 		"player":player,
 		"started":false,
-		"pid":player["pid"]
+		"pid":player["pid"],
+		"effect":""
 		}
 }
 

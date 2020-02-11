@@ -221,7 +221,7 @@ var handling_queue = false;
 
 function queue_handler() {
 	console.log("handling")
-	console.log(handling_queue + " " + queue.length)
+	// console.log(handling_queue + " " + queue.length)
 	if ( handling_queue == false && queue.length > 0 ) {
 		handling_queue = true;
 		var first = queue.shift();
