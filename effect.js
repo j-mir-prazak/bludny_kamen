@@ -171,7 +171,7 @@ function randomBetween(min, max) {
 
 function mpv_volume_effect ( input ) {
 	var input = input || false;
-	var start = randomBetween(930,999);
+	var start = randomBetween(500,505);
 	if (start > 500 && start < 504 ) {
 		var end = randomBetween(300,700);
 		var step = end / 999;
