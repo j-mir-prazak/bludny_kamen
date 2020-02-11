@@ -1,7 +1,6 @@
 !/bin/bash
 
 SLEEP=0;
-SPEED=0;
 INPUT=0;
 
 if [[ ! -z $1 ]]; then
@@ -12,14 +11,7 @@ else
 fi
 
 if [[ ! -z $2 ]]; then
-	SPEED=$2;
-else
-	echo "no speed time set"
-	exit 1;
-fi
-
-if [[ ! -z $3 ]]; then
-	INPUT=$3;
+	INPUT=$2;
 else
 	echo "no input fifo set"
 	exit 1;
