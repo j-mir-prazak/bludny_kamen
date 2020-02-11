@@ -206,7 +206,6 @@ function mpv_speed_effect ( input ) {
 			});
 
 		}
-	}
 
 	// console.log(queue)
 	queue_handler()
