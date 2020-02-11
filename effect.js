@@ -119,7 +119,7 @@ function send_mpv_volume_effect( args ) {
 		for( var i = 0; i < string.length; i++) {
 			if ( string[i] != "" ) console.log(string[i])
 			if ( string[i] != "bang" ) {
-				console.log(volume + " " + speed)
+				console.log(volume)
 				clearTimeout(killerInstinct)
 				killerInstinct = setTimeout(function(){
 					console.log("kill")
