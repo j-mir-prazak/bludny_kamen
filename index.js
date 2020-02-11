@@ -106,6 +106,9 @@ function mpv_player(index, file) {
 				if (index == 1) {
 					mpv_effect(index, "speed")
 				}
+				if (index == 2) {
+					mpv_effect(index, "volume")
+				}
 				check_ready_players()
 				}
 			}
