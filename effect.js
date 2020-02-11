@@ -234,6 +234,7 @@ function queue_handler() {
 
 var index = process.argv[2];
 var type = process.argv[3];
+console.log("init")
 console.log(index)
 console.log(type)
 if (type == "speed") mpv_speed_effect(index);
