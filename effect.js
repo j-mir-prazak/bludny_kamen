@@ -97,14 +97,13 @@ function send_mpv_speed_effect( args ) {
 }
 function send_mpv_volume_effect( args ) {
 
-	var sleep = args[0] || false;
-	var speed = args[1] || false;
-	var input = args[2] || false;
+	var speed = args[0] || false;
+	var input = args[1] || false;
 
 	console.log("sleep "+sleep)
 	console.log("vol "+speed)
 
-	var effect = spawner.spawn( './volume_effect.sh', new Array(sleep,speed,input), {detached:true, shell:'/bin/bash'} )
+	var effect = spawner.spawn( './volume_effect.sh', new Array(sleep,input), {detached:true, shell:'/bin/bash'} )
 	var killerInstinct = setTimeout(function(){
 		console.log("kill")
 		console.log(effect.pid)
