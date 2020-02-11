@@ -19,7 +19,7 @@ if [[ ! -p "./mpv_fifo/input"$INPUT ]]; then
 	exit 1;
 fi
 
-sleep 0.3;
+sleep 0.01;
 echo "bang"
 echo '{ "command" : [ "set_property", "volume", 0.'$VOLUME'] }' > ./mpv_fifo/input$INPUT;
 echo "done";
