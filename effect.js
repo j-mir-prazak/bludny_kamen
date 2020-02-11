@@ -173,10 +173,10 @@ function mpv_volume_effect ( input ) {
 	console.log("start "+start)
 	if (start > 500 && start < 504 ) {
 		var end = randomBetween(300,700);
-		var step = end / 999;
+		var step = 999 / end;
 		console.log("step " + step)
 		var vol = 0;
-		for (var i = 0; i < end; i++) {
+		for ( var i = 0; i < end; i++ ) {
 			console.log(vol)
 			vol = vol + step
 			// send_mpv_speed_effect(String(randomBetween(0,9)), String(randomBetween(89,99)), input)
