@@ -102,7 +102,7 @@ function send_mpv_volume_effect( args ) {
 	var input = args[2] || false;
 
 	console.log("sleep "+sleep)
-	console.log("speed "+speed)
+	console.log("vol "+speed)
 
 	var effect = spawner.spawn( './volume_effect.sh', new Array(sleep,speed,input), {detached:true, shell:'/bin/bash'} )
 	var killerInstinct = setTimeout(function(){
