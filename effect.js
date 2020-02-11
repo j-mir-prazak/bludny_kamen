@@ -176,6 +176,7 @@ function mpv_volume_effect ( input ) {
 		var step = end / 999;
 		var vol = 0;
 		for (var i = 0; i < end; i++) {
+			console.log(vol)
 			vol = vol + step
 			// send_mpv_speed_effect(String(randomBetween(0,9)), String(randomBetween(89,99)), input)
 			queue.push({
